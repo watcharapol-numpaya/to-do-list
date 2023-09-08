@@ -21,9 +21,12 @@ const App = () => {
       setTodoList(JSON.parse(storedTodoList));
     }
   }, []);
+
+
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
+  
   const handleInputChange = (e) => {
     if (e.target.value.length <= textLimit) {
       setText(e.target.value);
@@ -44,6 +47,13 @@ const App = () => {
       setText("");
     }
   };
+
+  const handleDeleteTodo = (id)=> {
+ 
+       setTodoList((prevTodo) =>
+       prevTodo.filter((todo) => todo.id !== id)
+      );
+  }
 
   return (
     <div className="w-full h-full bg-gray-500">
@@ -71,9 +81,9 @@ const App = () => {
      
             <div className="space-y-2 mt-1">
               {todoList &&
-                todoList.map((item) => (
+                todoList.toReversed().map((item) => (
                   <div key={item.id}>
-                    <TodoItemCard todo={item.todo} />
+                    <TodoItemCard data={item} onDelete={handleDeleteTodo} />
                   </div>
                 ))}
             </div>
