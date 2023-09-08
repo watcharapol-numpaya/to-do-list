@@ -1,9 +1,8 @@
- import { useState } from "react";
+import { useState } from "react";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 
-const TodoItemCard = ({id,todo}) => {
- 
+const TodoItemCard = ({ todo }) => {
   const [isHover, setIsHover] = useState(false); // State to track hover
 
   const onHover = () => {
@@ -19,19 +18,15 @@ const TodoItemCard = ({id,todo}) => {
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       className={`flex  shadow-lg w-full rounded-lg overflow-hidden cursor-default ${
-        isHover ? " h-full" : "h-10"
+        isHover ? " h-auto" : " "
       } `}
     >
       <div
         className={`flex ${
-          isHover ? "" : "items-center "
-        }   bg-white  w-5/6 p-1 px-2`}
+          isHover ? "bg-gray-200" : "  "
+        }   bg-white  w-5/6 p-2 px-2`}
       >
-        <p className={` ${isHover ? "" : "truncate "}`}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio,
-          voluptates?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Odio, voluptates
-        </p>
+        <p className={` ${isHover ? "" : "truncate "}`}>{todo}</p>
       </div>
 
       <div className=" flex w-1/6 ">
