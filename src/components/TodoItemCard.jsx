@@ -5,9 +5,9 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 
 const TodoItemCard = ({ data, onDelete, onSaveEdit }) => {
-  const [isHover, setIsHover] = useState(false); // State to track hover
-  const [isEditing, setIsEditing] = useState(false); // State to track editing
-  const [editedText, setEditedText] = useState(data.todo); // State to store edited text
+  const [isHover, setIsHover] = useState(false);  
+  const [isEditing, setIsEditing] = useState(false);  
+  const [editedText, setEditedText] = useState(data.todo);  
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -33,13 +33,11 @@ const TodoItemCard = ({ data, onDelete, onSaveEdit }) => {
   };
 
   const handleSaveEdit = () => {
-    // Save the edited text and exit edit mode
     onSaveEdit(data.id, editedText);
     setIsEditing(false);
   };
 
   const handleCancel = () => {
-    // Exit edit mode and reset the edited text
     setIsEditing(false);
     setEditedText(data.todo);
   };

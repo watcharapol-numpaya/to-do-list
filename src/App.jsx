@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import EditSharpIcon from "@mui/icons-material/EditSharp";
-import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import TodoItemCard from "./components/TodoItemCard";
-import TodoList from "./components/TodoList";
 import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
