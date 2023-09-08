@@ -4,7 +4,7 @@ import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 
-const TodoItemCard = ({ data, onDelete, onSaveEdit }) => {
+const TodoItemCard = ({ data, onDelete, onSaveEdit,onCheck  }) => {
   const [isHover, setIsHover] = useState(false);  
   const [isEditing, setIsEditing] = useState(false);  
   const [editedText, setEditedText] = useState(data.todo);  
@@ -46,19 +46,17 @@ const TodoItemCard = ({ data, onDelete, onSaveEdit }) => {
     setEditedText(e.target.value);
   };
 
+  const handleCheckBox = ()=>{
+    onCheck(data.id,!data.isFinish)
+  }
+
   return (
-    <div
-      className={`flex shadow-lg w-full rounded-lg overflow-hidden cursor-default ${
-        isHover ? "h-auto" : ""
-      } `}
-    >
-      <div
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-        className={`flex ${
-          isHover ? "bg-gray-200" : ""
-        } bg-white w-5/6 p-2 px-2`}
-      >
+    <div className={`flex shadow-lg w-full rounded-lg overflow-hidden cursor-default ${   isHover ? "h-auto" : "" } `}  >
+       <div className="p-2 bg-gray-100">
+        <input className="" onChange={handleCheckBox}  type="checkbox" checked={data.isFinish}/>
+      </div>
+      <div onMouseEnter={onHover} onMouseLeave={onLeave}  className={`flex ${   isHover ? "bg-gray-200" : ""  } bg-white w-5/6 p-2 px-2`} >
+ 
         {isEditing ? (
           <input
             ref={inputRef}
@@ -68,7 +66,7 @@ const TodoItemCard = ({ data, onDelete, onSaveEdit }) => {
             className="w-full outline-none"
           />
         ) : (
-          <p className={`${isHover ? "" : "truncate"}`}>{data.todo}</p>
+          <p className={`${isHover ? "" : "truncate"} ${data.isFinish?"line-through decoration-red-600":""}   `}>{data.todo}</p>
         )}
       </div>
 

@@ -39,6 +39,7 @@ const App = () => {
       const newTodo = {
         id: uuidv4(),
         todo: text,
+        isFinish:false
       };
       setTodoList([...todoList, newTodo]);
       setText("");
@@ -56,6 +57,13 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
+const handleCheckBox = (id,isFinish)=>{
+  const updateTodoListStatus = todoList.map((todo) => {
+    return todo.id === id ? { ...todo, isFinish: isFinish } : todo;
+  });
+  setTodoList(updateTodoListStatus);
+}
+
   return (
     <div className="w-full h-full bg-gray-500">
       <div className="h-screen">
@@ -67,6 +75,7 @@ const App = () => {
               onSubmit={handleAddTodo}
             >
               <input
+              placeholder="Add New Task"
                 onChange={handleInputChange}
                 value={text}
                 type="text "
@@ -91,6 +100,8 @@ const App = () => {
                       data={item}
                       onDelete={handleDeleteTodo}
                       onSaveEdit={handleSaveEdit}
+                      onCheck={handleCheckBox}
+      
                     />
                   </div>
                 ))}
