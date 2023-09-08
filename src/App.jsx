@@ -74,7 +74,7 @@ const App = () => {
               />
               <button
                 type="submit"
-                className="bg-red-400 font-semibold p-1 px-2 rounded-r-lg"
+                className="bg-green-400 font-semibold p-1 px-2 rounded-r-lg"
               >
                 ADD
               </button>
