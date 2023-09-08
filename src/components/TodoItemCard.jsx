@@ -52,10 +52,10 @@ const TodoItemCard = ({ data, onDelete, onSaveEdit,onCheck  }) => {
 
   return (
     <div className={`flex shadow-lg w-full rounded-lg overflow-hidden cursor-default ${   isHover ? "h-auto" : "" } `}  >
-       <div className="p-2 bg-gray-100">
+        <div className=" flex justify-center bg-gray-100 w-1/12">
         <input className="" onChange={handleCheckBox}  type="checkbox" checked={data.isFinish}/>
       </div>
-      <div onMouseEnter={onHover} onMouseLeave={onLeave}  className={`flex ${   isHover ? "bg-gray-200" : ""  } bg-white w-5/6 p-2 px-2`} >
+      <div onMouseEnter={onHover} onMouseLeave={onLeave}  className={`flex ${   isHover ? "bg-gray-200" : ""  } bg-white w-9/12 p-2 px-2`} >
  
         {isEditing ? (
           <input
@@ -70,7 +70,7 @@ const TodoItemCard = ({ data, onDelete, onSaveEdit,onCheck  }) => {
         )}
       </div>
 
-      <div className="flex w-1/6">
+      <div className="flex w-2/12">
         {isEditing ? (
           <>
             <div
