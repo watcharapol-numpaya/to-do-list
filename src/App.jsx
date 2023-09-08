@@ -22,11 +22,10 @@ const App = () => {
     }
   }, []);
 
-
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
-  
+
   const handleInputChange = (e) => {
     if (e.target.value.length <= textLimit) {
       setText(e.target.value);
@@ -37,7 +36,9 @@ const App = () => {
     return textLimit - text.length;
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+
     if (text) {
       const newTodo = {
         id: uuidv4(),
@@ -48,12 +49,16 @@ const App = () => {
     }
   };
 
-  const handleDeleteTodo = (id)=> {
- 
-       setTodoList((prevTodo) =>
-       prevTodo.filter((todo) => todo.id !== id)
-      );
-  }
+  const handleDeleteTodo = (id) => {
+    setTodoList((prevTodo) => prevTodo.filter((todo) => todo.id !== id));
+  };
+
+  const handleSaveEdit = (id, newTodo) => {
+    const newTodoList = todoList.map((todo) => {
+      return todo.id === id ? { ...todo, todo: newTodo } : todo;
+    });
+    setTodoList(newTodoList);
+  };
 
   return (
     <div className="w-full h-full bg-gray-500">
@@ -61,7 +66,10 @@ const App = () => {
         <div className="flex justify-center w-full ">
           <div className="h-full w-128 bg-red-200 mt-10 rounded-lg p-4 shadow-lg">
             <p className="font-semibold text-xl">To-Do List</p>
-            <div className="flex relative my-4 shadow-lg">
+            <form
+              className="flex relative my-4 shadow-lg"
+              onSubmit={handleAddTodo}
+            >
               <input
                 onChange={handleInputChange}
                 value={text}
@@ -69,21 +77,25 @@ const App = () => {
                 className="p-2 w-full rounded-l-lg outline-none"
               />
               <button
+                type="submit"
                 className="bg-red-400 font-semibold p-1 px-2 rounded-r-lg"
-                onClick={handleAddTodo}
               >
                 ADD
               </button>
               <p className="absolute text-xs right-14 bottom-0">
                 {handleTextLeft()}/{textLimit}
               </p>
-            </div>
-     
+            </form>
+
             <div className="space-y-2 mt-1">
               {todoList &&
                 todoList.toReversed().map((item) => (
                   <div key={item.id}>
-                    <TodoItemCard data={item} onDelete={handleDeleteTodo} />
+                    <TodoItemCard
+                      data={item}
+                      onDelete={handleDeleteTodo}
+                      onSaveEdit={handleSaveEdit}
+                    />
                   </div>
                 ))}
             </div>
